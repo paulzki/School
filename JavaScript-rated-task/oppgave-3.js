@@ -4,6 +4,6 @@ function arealTilTrekant(høyde, bredde) {
 function arealTilFirkant(høyde, bredde) {
   return høyde * bredde;
 }
-function summer() {
-  return arealTilTrekant(4, 4) + arealTilFirkant(2, 6);
+function summer(trekantHøyde,trekantBredde,firkantHøyde,firkantBredde) {
+  return arealTilTrekant(trekantHøyde, trekantBredde) + arealTilFirkant(firkantHøyde, firkantBredde);
 }
