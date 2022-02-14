@@ -1,0 +1,82 @@
+DROP DATABASE IF EXISTS kunde_database;
+SET SQL_SAFE_UPDATES = 0;
+
+CREATE DATABASE kunde_database;
+USE kunde_database;
+
+CREATE TABLE kunder(
+KundeID INTEGER,
+Etternavn TEXT,
+Navn TEXT,
+Arbeidsplass TEXT,
+Fødselsdato DATE,
+Telefon INTEGER,
+Epost TEXT,
+Premium BOOLEAN,
+Total INTEGER
+);
+
+INSERT INTO kunder (KundeID, Etternavn, Navn, Arbeidsplass, Fødselsdato, Telefon, Epost, Premium, Total)
+VALUES (1,'Michelsen','Peter','ESSO','1962-04-02','4499282','permichelsen@esso.com',True,13000000),
+(2, 'Holsen', 'Olaug', 'Microsoft', '1988-08-22', 87654235, 'olaug@hotmail.com', FALSE, 8900),
+(3, 'Varhaug', 'Anne', 'Coop', '1932-02-11', 3829321, 'annevarhaug@post.no', FALSE, 32000),
+(4, 'Legendos', 'Lisa', 'Stavanger Bibliotek', '1991-01-01', 849201, 'lisaleser@bibliotek.no', FALSE, 52000),
+(5, 'Garcia', 'Manolo', 'Elproffene', '1919-05-07', '393922', 'elproff@proff.no', FALSE, 948888),
+(6, 'Fierro', 'Pietro', 'AK Maskiner', '1974-11-28', 42982974, 'ierropietro@akmaskiner.com', TRUE, 1000000),
+(7, 'Connor', 'John', 'Apple', '1978-03-23', '9471191', 'John.connor@apple.com', FALSE, 60000),
+(8, 'Moen', 'Sara', 'Fargerike', '1999-09-22', 4810938, 'Sara.moen@farge.com', FALSE, 249823),
+(9, 'Kevin', 'Lauren', 'Kiwi', '1996-04-22', 47865137,'Trenches96@kiwi.no', TRUE, 54344),
+(10, 'Eskland', 'Abdi', 'Akademiet', '1989-12-06', 87301853, 'abdi@aka.lærer.no', FALSE, 67912);
+
+UPDATE kunder
+SET telefon = 46729718
+WHERE kundeId = 3;
+
+DELETE FROM kunder
+WHERE kundeId = 5;
+
+SELECT  *
+FROM kunder
+WHERE premium_kunde = TRUE;
+
+SELECT *
+FROM kunder
+ORDER BY fødselsdato;
+
+SELECT *
+FROM kunder
+WHERE navn LIKE 'a%';
+
+SELECT *
+FROM kunder
+WHERE fødselsdato BETWEEN '1980-01-01' AND '2000-01-01';
+
+SELECT *
+FROM kunder
+WHERE kunder.Total = (SELECT
+MAX(Total)
+FROM kunder);
+ 
+SELECT *
+FROM kunder
+WHERE kunder.Total = (SELECT
+MIN(Total)
+FROM kunder);
+
+SELECT AVG(Total) as Gjennomsnitt
+FROM kunder;
+
+SELECT COUNT(KundeID) as antall_kunder
+FROM kunder;
+
+SELECT SUM(Total) as totalsum
+FROM kunder;
+
+SELECT *
+FROM kunder
+WHERE Etternavn LIKE 'm%';
+
+UPDATE kunder
+SET
+Premium = true
+WHERE premium = false AND Total>50000;
